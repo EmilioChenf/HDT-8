@@ -65,10 +65,10 @@ public class EmergencyUI extends Application {
                     prioridadBox.setValue(null);
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    logArea.appendText("❌ Error al guardar el paciente\n");
+                    logArea.appendText("Error al guardar el paciente\n");
                 }
             } else {
-                logArea.appendText("⚠️ Debes completar todos los campos para agregar un paciente.\n");
+                logArea.appendText("Debes completar todos los campos para agregar un paciente.\n");
             }
         });
 
