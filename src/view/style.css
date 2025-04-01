@@ -1,0 +1,13 @@
+.button {
+    -fx-background-color: linear-gradient(to bottom, #d6f3ff, #a3cfff);
+    -fx-border-color: #3399ff;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 6 12;
+}
+.text-area {
+    -fx-font-family: "Consolas", monospace;
+    -fx-font-size: 12px;
+}
