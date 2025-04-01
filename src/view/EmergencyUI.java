@@ -13,11 +13,28 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Clase que representa la interfaz gráfica del sistema de emergencias.
+ * Permite cargar pacientes desde archivo, agregar nuevos pacientes manualmente
+ * y atender pacientes por orden de prioridad.
+ * 
+ * Utiliza JavaFX para crear la ventana interactiva del sistema.
+ * 
+ * @author Fátima Navarro
+ * @author Emilio Chen
+ */
 public class EmergencyUI extends Application {
 
     private EmergencyController controller;
     private TextArea logArea;
 
+    /**
+     * Método principal que construye la interfaz gráfica.
+     * Crea campos de entrada, botones de acción y el área de log.
+     * Asocia eventos para agregar, cargar y atender pacientes.
+     *
+     * @param primaryStage La ventana principal de la aplicación JavaFX.
+     */
     @Override
     public void start(Stage primaryStage) {
         controller = new EmergencyController();
@@ -88,6 +105,7 @@ public class EmergencyUI extends Application {
             }
         });
 
+        // Agregar componentes a la interfaz
         root.getChildren().addAll(
             new Label("Agregar nuevo paciente:"),
             nombreField,
