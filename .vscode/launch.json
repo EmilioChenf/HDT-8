@@ -6,7 +6,7 @@
       "name": "Run JavaFX App",
       "request": "launch",
       "mainClass": "Main",
-      "vmArgs": "--module-path C:\\Users\\VICTUS\\Documents\\javafx-sdk-24\\lib --add-modules javafx.controls,javafx.fxml"
+      "vmArgs": "--module-path /Users/fatu/Documents/javafx-sdk-24/lib --add-modules javafx.controls,javafx.fxml"
     }
   ]
 }

@@ -1,7 +1,6 @@
 {
-    "java.project.referencedLibraries": [
-      "C:/Users/VICTUS/Documents/javafx-sdk-24/lib/**/*.jar"
-    ],
-    "java.debug.settings.onBuildFailureProceed": true
-  }
-  
+  "java.project.referencedLibraries": [
+    "/Users/fatu/Documents/javafx-sdk-24/lib/**/*.jar",
+    "test-lib/**/*.jar"
+  ]
+}

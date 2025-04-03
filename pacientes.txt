@@ -3,3 +3,4 @@ Maria Ramirez,apendicitis,A
 Lorenzo Toledo,chikunguya,E
 Carmen Sarmientos,dolores de parto,B
 Emilio Chen,malestar en el estómago,A
+hola,cancer anal,B
