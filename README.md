@@ -1,128 +1,176 @@
-# 🏥 Sistema de Atención de Emergencias
+# Sistema de Atención de Emergencias
 
-Este proyecto es una implementación completa de un **sistema de atención a pacientes en emergencias** desarrollado en **Java (JavaFX)** y **Python (SimPy)**. Está dividido en dos partes:
+Este proyecto implementa un sistema completo para la gestión y simulación de atención a pacientes en un servicio de emergencias. Está desarrollado en Java (para la interfaz y lógica principal) y Python (para la simulación).
 
-1. Una interfaz gráfica para registrar y atender pacientes con prioridad usando estructuras de datos personalizadas.
-2. Una simulación realista del sistema hospitalario utilizando recursos limitados, con análisis mediante gráficas.
+## Características
 
----
+- Registro de pacientes con nombre, síntoma y código de prioridad (A-E).
+- Atención de pacientes basada en prioridad usando una cola de prioridad (VectorHeap).
+- Interfaz gráfica construida con JavaFX para la gestión de pacientes.
+- Simulación del comportamiento de un hospital con recursos limitados usando SimPy.
+- Generación de gráficas y análisis estadístico del rendimiento del sistema.
 
-## 🎯 Objetivo
+## Estructura del Proyecto
 
-- Registrar pacientes con nombre, síntoma y código de prioridad (A–E).
-- Atender a los pacientes en orden de prioridad (A = más urgente).
-- Simular el comportamiento de un hospital usando recursos limitados.
-- Analizar tiempos de espera, carga de trabajo y generar gráficas.
+```
+proyecto/
+│
+├── src/                    # Código fuente Java
+│   ├── controller/         # Controladores para la interfaz
+│   ├── model/              # Modelos y entidades (Paciente)
+│   ├── utils/              # Utilidades (VectorHeap, PriorityQueue)
+│   ├── view/               # Vistas y componentes de UI
+│   └── Main.java           # Punto de entrada de la aplicación
+│
+├── test/                   # Pruebas unitarias
+│   └── VectorHeapTest.java # Tests para la implementación de VectorHeap
+│
+├── test-lib/               # Bibliotecas para pruebas
+│   ├── hamcrest-core-1.3.jar
+│   └── junit-4.13.2.jar
+│
+├── simulacion/             # Código Python para simulación
+│   ├── graficas.py         # Generación de gráficas con Matplotlib
+│   ├── recursos.py         # Definición de recursos del hospital
+│   └── simulacion_emergencias.py  # Simulación principal con SimPy
+│
+├── pacientes.txt           # Datos de ejemplo de pacientes
+└── README.md               # Este archivo
+```
 
----
+## Instalación y Configuración
 
-## 🗂️ Estructura del Proyecto
+### Requisitos previos
 
-HDT-8/ ├── src/ # Parte Java (interfaz y lógica) │ ├── controller/ │ ├── model/ │ ├── utils/ │ ├── view/ │ └── Main.java ├── simulacion/ # Parte Python (simulación y gráficas) │ ├── simulacion_emergencias.py │ ├── recursos.py │ ├── graficas.py ├── resultados/ # Salida de gráficas y (pronto) informe PDF │ ├── tiempos_atencion.png │ └── tiempo_promedio.png ├── pacientes.txt # Archivo con pacientes └── .vscode/ # Configuración de VS Code ├── launch.json └── settings.json
-
-markdown
-Copiar
-Editar
-
----
-
-## 💻 Tecnologías Utilizadas
-
-- Java 17+
-- JavaFX SDK 21 o 24
-- Visual Studio Code (con extensión Java Extension Pack)
-- Python 3.10+
-- SimPy (para simulación)
-- Matplotlib (para gráficas)
-
----
-
-## 🧩 Parte 1 – Interfaz Java (JavaFX + Cola de Prioridad)
-
-### ✅ Funcionalidades
-
-- Interfaz amigable para agregar y atender pacientes.
-- Lectura/escritura en `pacientes.txt`.
-- Uso de `VectorHeap` para manejar prioridad.
-- Atención automática por urgencia.
-- Registro visual en pantalla (TextArea).
-- Pruebas unitarias con JUnit.
-
-### ⚙️ Requisitos Java
-
+#### Para la parte Java:
 - Java JDK 17 o superior
-- [JavaFX SDK 21 o 24](https://gluonhq.com/products/javafx/) descomprimido
-- Visual Studio Code
+- JavaFX SDK 24 o superior
+- VS Code con Extension Pack for Java
 
-### 🛠️ Configuración en `.vscode/settings.json`
+#### Para la simulación:
+- Python 3.10 o superior
+- SimPy (`pip install simpy`)
+- Matplotlib (`pip install matplotlib`)
 
-```json
-{
-  "java.project.referencedLibraries": [
-    "C:/Users/TU_USUARIO/Documents/javafx-sdk-24/lib/**/*.jar"
-  ]
-}
-⚠️ Cambia "TU_USUARIO" por tu nombre de usuario o ruta real.
+### Configuración en VS Code
 
-🛠️ Configuración en .vscode/launch.json
-json
-Copiar
-Editar
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "java",
-      "name": "Run JavaFX App",
-      "request": "launch",
-      "mainClass": "Main",
-      "vmArgs": "--module-path C:/Users/TU_USUARIO/Documents/javafx-sdk-24/lib --add-modules javafx.controls,javafx.fxml"
-    }
-  ]
-}
-▶️ Cómo ejecutar la app JavaFX
-Abre el proyecto en VS Code
+1. Clona este repositorio:
+   ```
+   git clone https://github.com/tu-usuario/sistema-emergencias.git
+   cd sistema-emergencias
+   ```
 
-Asegúrate de que Main.java esté en src/ y no tenga package
+2. Configura JavaFX en tu entorno:
+   - Descarga [JavaFX SDK](https://gluonhq.com/products/javafx/) y descomprímelo
+   - Crea un archivo `.vscode/settings.json` con:
+     ```json
+     {
+       "java.project.referencedLibraries": [
+         "ruta/a/tu/javafx-sdk-24/lib/**/*.jar",
+         "test-lib/**/*.jar"
+       ]
+     }
+     ```
+   - Crea un archivo `.vscode/launch.json` con:
+     ```json
+     {
+       "version": "0.2.0",
+       "configurations": [
+         {
+           "type": "java",
+           "name": "Run JavaFX App",
+           "request": "launch",
+           "mainClass": "Main",
+           "vmArgs": "--module-path ruta/a/tu/javafx-sdk-24/lib --add-modules javafx.controls,javafx.fxml"
+         }
+       ]
+     }
+     ```
 
-Compila y ejecuta:
+## Ejecución
 
-bash
-Copiar
-Editar
-cd HDT-8
+### Aplicación Java
 
-javac --module-path "C:/Users/TU_USUARIO/Documents/javafx-sdk-24/lib" --add-modules javafx.controls,javafx.fxml -d out src/Main.java src/controller/*.java src/model/*.java src/utils/*.java src/view/*.java
+Para ejecutar la aplicación principal:
 
-java --module-path "C:/Users/TU_USUARIO/Documents/javafx-sdk-24/lib" --add-modules javafx.controls,javafx.fxml -cp out Main
-🧬 Parte 2 – Simulación en Python (SimPy)
-✅ ¿Qué simula?
-Llegada aleatoria de pacientes con prioridad 1–5
+1. Abre el proyecto en VS Code
+2. Asegúrate de que la configuración de JavaFX es correcta
+3. Haz clic en Run/Debug en VS Code o ejecuta:
+   ```
+   javac --module-path "ruta/a/tu/javafx-sdk-24/lib" --add-modules javafx.controls,javafx.fxml -d out src/**/*.java
+   java --module-path "ruta/a/tu/javafx-sdk-24/lib" --add-modules javafx.controls,javafx.fxml -cp out Main
+   ```
 
-Atención en etapas: triage → doctor → laboratorio → rayos X
+### Pruebas Unitarias
 
-Recursos limitados: 2 doctores, 2 enfermeras, 1 laboratorio, 1 rayos X
+Para ejecutar los tests:
 
-Registro del tiempo total por paciente
+1. En VS Code, ve a la vista de Tests
+2. Haz clic en Run Test junto a cada prueba o a todas
+3. Alternativamente, ejecuta desde terminal:
+   ```
+   javac -cp "test-lib/junit-4.13.2.jar:test-lib/hamcrest-core-1.3.jar:out" -d out test/*.java
+   java -cp "test-lib/junit-4.13.2.jar:test-lib/hamcrest-core-1.3.jar:out" org.junit.runner.JUnitCore test.VectorHeapTest
+   ```
 
-Gráficas automáticas generadas
+### Simulación Python
 
-⚙️ Requisitos Python
-Python 3.10 o superior
+Para ejecutar la simulación:
 
-Instalar dependencias:
+1. Navega al directorio de simulación:
+   ```
+   cd simulacion
+   ```
 
-bash
-Copiar
-Editar
-pip install simpy matplotlib
-▶️ Cómo ejecutar la simulación
-bash
-Copiar
-Editar
-cd simulacion
-python simulacion_emergencias.py
-📂 Salida generada
-resultados/tiempos_atencion.png: Tiempo total en el hospital por paciente
+2. Ejecuta el script principal:
+   ```
+   python simulacion_emergencias.py
+   ```
 
-resultados/tiempo_promedio.png: Tiempo promedio de atención
+## Diseño y Funcionamiento
+
+### Estructura de Datos Principal
+
+El sistema utiliza un `VectorHeap` como implementación de una cola de prioridad para organizar a los pacientes según su código de emergencia. Esta estructura garantiza que los pacientes con mayor urgencia (códigos A, B) sean atendidos antes que los de menor urgencia (códigos D, E).
+
+### Interfaz Gráfica
+
+La interfaz JavaFX permite:
+- Cargar pacientes desde un archivo
+- Agregar nuevos pacientes con sus síntomas y prioridad
+- Atender pacientes en orden de prioridad
+- Visualizar un registro de las acciones realizadas
+
+### Simulación
+
+La simulación en Python modela:
+- Llegada aleatoria de pacientes
+- Atención en diferentes estaciones (triage, doctor, laboratorio, rayos X)
+- Recursos limitados (doctores, enfermeras, equipamiento)
+- Medición de tiempos de espera y atención
+
+## Pruebas
+
+Se han implementado pruebas unitarias para verificar el funcionamiento correcto de `VectorHeap`, comprobando:
+- Inserción y extracción de elementos
+- Mantenimiento del orden por prioridad
+- Comportamiento con elementos del mismo tipo (Integer)
+- Comportamiento con objetos personalizados (Paciente)
+
+## Contribución
+
+Si deseas contribuir a este proyecto:
+1. Haz un fork del repositorio
+2. Crea una rama para tus cambios (`git checkout -b feature/nueva-funcionalidad`)
+3. Haz commit de tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+## Autores
+
+- Fátima Navarro
+- Emilio Chen
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
